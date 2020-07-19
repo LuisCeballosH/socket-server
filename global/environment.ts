@@ -1,0 +1,1 @@
+export const serverPort: number = Number(process.env.PORT) || 3000;
