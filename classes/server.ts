@@ -26,11 +26,14 @@ export default class Server {
     }
 
     private hearSocket() {
-        console.log('hearSocket');
+        // console.log('hearSocket');
         this.io.on('connection', client => {
-            console.log('connection client');
-            socket.disconnect(client);
+            // console.log('connection client');
+            // console.log(client.id);
+            socket.connection(client);
+            socket.login(client, this.io);
             socket.message(client, this.io);
+            socket.disconnect(client);
         });
     }
 
