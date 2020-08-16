@@ -30,10 +30,11 @@ export default class Server {
         this.io.on('connection', client => {
             // console.log('connection client');
             // console.log(client.id);
-            socket.connection(client);
+            socket.connection(client, this.io);
             socket.login(client, this.io);
+            socket.getUsers(client, this.io);
             socket.message(client, this.io);
-            socket.disconnect(client);
+            socket.disconnect(client,this.io);
         });
     }
 

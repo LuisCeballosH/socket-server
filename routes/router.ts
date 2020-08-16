@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express";
 import Server from "../classes/server";
+import { users } from "../sockets/sockets";
 
 export const router = Router();
 
@@ -17,7 +18,7 @@ router.get('/message', (request: Request, response: Response) => {
 router.post('/message', (request: Request, response: Response) => {
 
     let data = request.body;
-    
+
 
     const payload = {
         user: data.from,
@@ -50,4 +51,34 @@ router.post('/message/:id', (request: Request, response: Response) => {
         data,
         id
     })
+});
+
+router.get('/users', (request: Request, response: Response) => {
+
+    server.io.clients((error: any, clients: string[]) => {
+
+        if (error) {
+            return response.json({
+                ok: false,
+                error
+            });
+        }
+
+
+        return response.json({
+            ok: true,
+            clients
+        });
+    });
+
+});
+
+router.get('/users/detail', (request: Request, response: Response) => {
+
+    
+        return response.json({
+            ok: true,
+            clients: users.get()
+        });
+
 });

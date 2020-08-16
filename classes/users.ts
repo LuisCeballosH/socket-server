@@ -22,7 +22,7 @@ export class Users {
     }
 
     get() {
-        return this.users;
+        return this.users.filter(u => u.name !== 'without name');
     }
 
     getId(id: string) {
